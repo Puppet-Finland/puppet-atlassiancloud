@@ -1,0 +1,13 @@
+{
+  "name": "puppetfinland-atlassiancloud",
+  "version": "0.1.0",
+  "author": "Puppet-Finland team",
+  "license": "BSD license",
+  "summary": "Configure Atlassian Cloud (backups)",
+  "source": "https://github.com/Puppet-Finland/puppet-atlassiancloud.git",
+  "project_page": "https://github.com/Puppet-Finland/puppet-atlassiancloud",
+  "dependencies": [
+    { "name": "puppetlabs/vcsrepo", "version_requirement": ">= 1.5.0" },
+    { "name": "puppetfinland/os", "version_requirement": ">= 0.5.5" }
+  ]
+}
