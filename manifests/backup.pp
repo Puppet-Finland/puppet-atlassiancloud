@@ -77,7 +77,7 @@ class atlassiancloud::backup
         ensure      => $ensure,
         user        => $::os::params::adminuser,
         environment => "MAILTO=${email}",
-        command     => "${script_name} jira && ${script_name} wiki",
+        command     => "${script_name} --source jira --timestamp false && ${script_name} --source wiki --timestamp false",
         hour        => $hour,
         minute      => $minute,
         weekday     => $weekday,
