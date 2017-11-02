@@ -15,5 +15,5 @@ class atlassiancloud
 
 ) inherits atlassiancloud::params
 {
-    # Empty
+    include ::atlassiancloud::prequisites
 }

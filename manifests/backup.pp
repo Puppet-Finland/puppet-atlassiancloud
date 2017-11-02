@@ -47,6 +47,8 @@ class atlassiancloud::backup
 ) inherits atlassiancloud::params
 {
 
+    include ::atlassiancloud
+
     $script_name = '/opt/automatic-cloud-backup/backup.sh'
     $config_name = '/root/.backup.sh.vars'
 
