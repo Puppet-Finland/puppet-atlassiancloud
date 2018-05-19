@@ -1,6 +1,6 @@
 {
   "name": "puppetfinland-atlassiancloud",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Puppet-Finland team",
   "summary": "Automate Atlassian Cloud backups",
   "license": "BSD-2-Clause",
