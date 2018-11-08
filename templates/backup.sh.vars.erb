@@ -4,10 +4,10 @@ EMAIL=<%= @auth_email %>
 API_TOKEN=<%= @api_token %>
 INSTANCE=<%= @instance %>.atlassian.net
 LOCATION=<%= @output_dir %>
-DOWNLOAD_FOLDER=<%= @output_dir %>
 
 # The new JIRA backup script reinvented this variable name
 HOSTNAME=$INSTANCE
+DOWNLOAD_FOLDER=$LOCATION
 
 # Append a timestamp to the backed up file (true/false). Set to false if an
 # external backup applications handles backup rotatoin.
