@@ -32,6 +32,11 @@
 #   Weekday(s) when backup job gets run. Defaults to '*/2' (every other day). 
 #   Due to Atlassian Cloud backup throttling keeping the default is probably the 
 #   best approach.
+# [*progress_checks*]
+#   How many times the backup scripts check for progress before exiting.
+#   Defaults to 60. This lets the scripts wait for the downloadable backup file
+#   for 600 seconds (60*10) before they give up. You may need to increase this
+#   if you're backing up lots of data.
 # [*email*]
 #   Email address where notifications are sent. Defaults to top-scope variable
 #   $::servermonitor.
@@ -48,6 +53,7 @@ class atlassiancloud::backup
     $hour = '14',
     $minute = '21',
     $weekday = '*/2',
+    $progress_checks = 60,
     $email = $::servermonitor
 
 ) inherits atlassiancloud::params
