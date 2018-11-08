@@ -11,9 +11,13 @@
 #   automatic-cloud-backup repository will be kept at the latest version if this 
 #   is set to 'present'. Defaults to 'present'.
 # [*username*]
-#   Username for Atlassian Cloud
+#   Username (for Confluence Cloud authentication)
 # [*password*]
-#   Password for Atlassian Cloud
+#   Password (for Confluence Cloud authentication)
+# [*auth_email*]
+#   Email address (for JIRA authentication)
+# [*api_token*]
+#   API token (for JIRA authentication). Must be paired with correct $auth_email.
 # [*instance*]
 #   The Atlassian Cloud instance. In practice the first part of the FQDN. For 
 #   example, for 'myproject.atlassian.net' value of $instance would be 
@@ -36,6 +40,8 @@ class atlassiancloud::backup
 (
     $username,
     $password,
+    $auth_email,
+    $api_token,
     $instance,
     $ensure = 'present',
     $output_dir = '/var/backups/local',
@@ -49,7 +55,8 @@ class atlassiancloud::backup
 
     include ::atlassiancloud
 
-    $script_name = '/opt/automatic-cloud-backup/backup.sh'
+    $confluence_backup_script_name = '/opt/automatic-cloud-backup/backup.sh'
+    $jira_backup_script_name = '/opt/automatic-cloud-backup/backup-jira-api-token.sh'
     $config_name = '/root/.backup.sh.vars'
 
     $vcsrepo_ensure = $ensure ? {
@@ -74,12 +81,11 @@ class atlassiancloud::backup
         mode    => '0700',
     }
 
-
     cron { 'backup-atlassian-cloud-cron':
         ensure      => $ensure,
         user        => $::os::params::adminuser,
         environment => "MAILTO=${email}",
-        command     => "${script_name} --source jira --timestamp false && ${script_name} --source wiki --timestamp false",
+        command     => "${confluence_backup_script_name} --source wiki --timestamp false && ${jira_backup_script_name}",
         hour        => $hour,
         minute      => $minute,
         weekday     => $weekday,
